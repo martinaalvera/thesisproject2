@@ -6,9 +6,9 @@
     - name: Install Dependencies
       package:
         name: ['git', 'make', 'python3-psycopg2', 'virtualenv']
-    - name: Install nginx dependencies
-      apt:
-        pkg: nginx-common=1.10.3-0ubuntu0.16.04.2ppa1
+    #- name: Install nginx dependencies
+    #  apt:
+    #    pkg: nginx-common=1.10.3-0ubuntu0.16.04.2ppa1
   handlers:
     - name: Restart Galaxy
       systemd:
@@ -20,14 +20,4 @@
     - name: Change owner nginx_upload_store dir
       command: chown -R www-data:galaxy /export/galaxy/database/tmp/nginx_upload_store
   roles:
-    - galaxyproject.postgresql
-    - role: natefoo.postgresql_objects
-      become: true
-      become_user: postgres
-    - geerlingguy.pip
-    - galaxyproject.galaxy
-    - role: uchida.miniconda
-      become: true
-      become_user: galaxy
-    - usegalaxy_eu.galaxy_systemd
-    - galaxyproject.nginx
+    - test-role
