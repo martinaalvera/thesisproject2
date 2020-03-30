@@ -42,8 +42,8 @@
         new_file_path: /export/galaxy/database/tmp
         check_migrate_tools: false
         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
-        #nginx_upload_store: /export/galaxy/database/tmp/nginx_upload_store
-        #nginx_upload_path: "/galaxy/_upload"
+        nginx_upload_store: /export/galaxy/database/tmp/nginx_upload_store
+        nginx_upload_path: "/galaxy/_upload"
         require_login: "True"
         allow_user_creation: "True"
         allow_user_impersonation: "True"
@@ -93,7 +93,7 @@
     name: galaxyproject.nginx
   vars:
     nginx_selinux_allow_local_connections: true
-    #nginx_flavor: extras=1.10.3-0ubuntu0.16.04.2ppa1
+    nginx_flavor: extras=1.10.3-0ubuntu0.16.04.2ppa1
     nginx_servers:
       - galaxy
     nginx_enable_default_server: false

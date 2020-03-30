@@ -6,9 +6,9 @@
     - name: Install Dependencies
       package:
         name: ['git', 'make', 'python3-psycopg2', 'virtualenv']
-    #- name: Install nginx dependencies
-    #  apt:
-    #    pkg: nginx-common=1.10.3-0ubuntu0.16.04.2ppa1
+    - name: Install nginx dependencies
+      apt:
+        pkg: nginx-common=1.10.3-0ubuntu0.16.04.2ppa1
   handlers:
     - name: Restart Galaxy
       systemd:
