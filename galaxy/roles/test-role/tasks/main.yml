@@ -1,5 +1,12 @@
 ---
 
+- name: '[Ubuntu] Prevent nginx update from Ubuntu repository'
+  copy:
+    src: 'galaxyproject-nginx-pin-700'
+    dest: '/etc/apt/preferences.d/'
+  become_user: root
+  become_method: sudo
+  when: ansible_os_family == "Debian"
 - name: Include postgresql role
   include_role:
     name: galaxyproject.postgresql
