@@ -50,7 +50,7 @@
         check_migrate_tools: false
         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
         nginx_upload_store: /export/galaxy/database/tmp/nginx_upload_store
-        nginx_upload_path: "/galaxy/_upload"
+        nginx_upload_path: "/_upload"
         require_login: "True"
         allow_user_creation: "True"
         allow_user_impersonation: "True"
@@ -95,6 +95,15 @@
     galaxy_systemd_mode: mule
     galaxy_zergpool_listen_addr: 127.0.0.1:8080
     galaxy_restart_handler_name: "Restart Galaxy"
+- name: Install nginx dependencies
+  apt:
+    pkg: nginx-common=1.10.3-0ubuntu0.16.04.2ppa1
+- name: Create nginx_upload_store dir
+  file:
+    path: /export/galaxy/database/tmp/nginx_upload_store
+    state: directory
+    owner: www-data
+    group: galaxy
 - name: Include nginx role
   include_role:
     name: galaxyproject.nginx
@@ -106,3 +115,10 @@
     nginx_enable_default_server: false
     nginx_conf_http:
       client_max_body_size: 1g
+- name: Change owner Galaxy dir
+  file:
+    path: /home/galaxy
+    state: directory
+    recurse: yes
+    owner: galaxy
+    group: galaxy
